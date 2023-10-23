@@ -16,6 +16,10 @@
                         {{ else }}
                         {{$ingredient}}
                         {{ end }}
+                        {{ if $details.Note }}
+                        <br />
+                        <p class="italic pl-5 border-l-2 border-current">Note: {{$details.Note}}</p>
+                        {{ end }}
                     </li>
                     {{ end }}
                     {{ end }}
