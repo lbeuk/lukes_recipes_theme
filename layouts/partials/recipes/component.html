@@ -1,0 +1,21 @@
+{{ range $name, $recipe := . }}
+
+{{$parsed_name := replace $name " " "_ "| title }}
+
+{{ $times := newScratch}}
+{{ $times.Set "total" 0 }}
+{{ range .Time }}
+{{ range $name, $dur := . }}
+{{ $parsed_dur := (time.ParseDuration $dur).Seconds }}
+{{ $times.Add "total" $parsed_dur}}
+{{ $times.Set $name $parsed_dur}}
+{{ end }}
+{{ end }}
+
+{{$merged_dict := merge $recipe (dict "times" $times.Values)}}
+
+<div id="{{ $parsed_name }}">
+    {{partial "recipes/sub_component.html" (dict $name $merged_dict)}}
+</div>
+
+{{ end }}

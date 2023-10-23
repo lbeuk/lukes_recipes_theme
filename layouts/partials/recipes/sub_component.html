@@ -1,0 +1,40 @@
+{{ range $name, $recipe := . }}
+
+<div id="{{ $name }}" class="relative isolate overflow-hidden">
+    <h2 class="text-2xl font-bold tracking-tight sm:text-4xl mb-2">{{$name}}</h2>
+    <div class="flex flex-col md:flex-row bg-stone-200">
+        <div class="flex flex-col bg-slate-50 w-full md:w-72 shrink-0">
+            <div class="p-4 border-solid border-2 border-b-0 border-slate-900 grow">
+                <h1>Ingredients</h1>
+                <ul class="list-disc list-inside divide-y divide-dashed divide-slate-900">
+                    {{ range .Ingredients}}
+                    {{ range $ingredient,$details := . }}
+                    <li><span class="font-bold">{{$details.Amount}}</span>
+                        {{ if $name := $details.CREF }}
+                        {{$parsed_name := replace $name " " "_ "| title }}
+                        <a href="#{{ $parsed_name }}" class="text-blue-900">{{$ingredient}}</a>
+                        {{ else }}
+                        {{$ingredient}}
+                        {{ end }}
+                    </li>
+                    {{ end }}
+                    {{ end }}
+                </ul>
+
+            </div>
+            <div class="p-4 border-solid border-2 border-slate-900">
+                {{ partial "recipes/times.html" .times}}
+            </div>
+        </div>
+        <div class="p-4">
+            <h2 class="text-2xl font-bold tracking-tight sm:text-3xl border-b-2 border-current">Instructions</h2>
+            <ol class="list-decimal list-inside divide-y divide-dashed divide-current">
+                {{ range .Instructions }}
+                <li>{{.}}</li>
+                {{ end }}
+            </ol>
+        </div>
+    </div>
+
+    {{ end }}
+</div>
