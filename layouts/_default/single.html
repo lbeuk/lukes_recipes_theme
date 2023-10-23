@@ -1,7 +1,9 @@
 {{ define "main" }}
-<article class="container mx-auto">
+<article class="container mx-auto space-y-10">
     {{ partial "post_banner.html" . }}
-    {{ .Content }}
+    <div class="max-w-2xl space-y-3 text-lg border-l-4 border-solid border-stone-300 pl-8 mx-4">
+        {{ .Content }}
+    </div>
     <div>
         {{ partial "recipes/recipe.html" . }}
 
