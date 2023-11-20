@@ -33,7 +33,7 @@
                             <li><span class="font-bold">{{$details.Amount}}</span>
                                 {{ if $name := $details.CREF }}
                                 {{$parsed_name := replace $name " " "_ "| title }}
-                                <a href="#{{ $parsed_name }}" class="text-blue-900">{{$ingredient}}</a>
+                                <a href="#{{ $parsed_name }}">{{$ingredient}}</a>
                                 {{ else }}
                                 {{$ingredient}}
                                 {{ end }}
